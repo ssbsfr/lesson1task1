@@ -3,38 +3,44 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    // Декларативно: описываем, как должен выглядеть DOM-дерево нашего компонента.
-    <div className="App">
-      <header className="App-header">
-        {/* Декларативно: указываем, что нужно отобразить изображение с заданными классами и атрибутами */}
-        <img src={logo} className="App-logo" alt="logo" />
-
-        {/* Декларативно: описание абзаца с текстом */}
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-
-        {/* Декларативно: описание ссылки, которая ведёт на React сайт */}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-
-        {/*
-          Декларативно: выводим текущий год внутри абзаца.
-          Здесь присутствует императивная часть: вызов new Date().getFullYear() – он выполняется как функция для вычисления значения.
-          Однако результат этого вычисления используется декларативно в JSX.
-        */}
-        <p style={{ marginTop: '1rem' }}>
-          &copy; {new Date().getFullYear()}
-        </p>
-      </header>
-    </div>
+  // Создаем элемент <div className="App">...</div> через React.createElement:
+  return React.createElement(
+    'div',
+    { className: 'App' },
+    // В качестве дочернего элемента передаем элемент header:
+    React.createElement(
+      'header',
+      { className: 'App-header' },
+      // Элемент <img src={logo} className="App-logo" alt="logo" />
+      React.createElement('img', { src: logo, className: 'App-logo', alt: 'logo' }),
+      // Элемент абзаца с текстом "Edit <code>src/App.js</code> and save to reload."
+      React.createElement(
+        'p',
+        null,
+        'Edit ',
+        // Вложенный элемент <code>src/App.js</code>
+        React.createElement('code', null, 'src/App.js'),
+        ' and save to reload.'
+      ),
+      // Элемент ссылки <a ...>Learn React</a>
+      React.createElement(
+        'a',
+        {
+          className: 'App-link',
+          href: 'https://reactjs.org',
+          target: '_blank',
+          rel: 'noopener noreferrer'
+        },
+        'Learn React'
+      ),
+      // Элемент абзаца, в котором отображается текущий год
+      React.createElement(
+        'p',
+        { style: { marginTop: '1rem' } },
+        '\u00A9 ', // Символ ©
+        new Date().getFullYear() // Вычисляем текущий год
+      )
+    )
   );
 }
 
